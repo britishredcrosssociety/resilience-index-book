@@ -8,7 +8,7 @@ bibliography: [book.bib]
 # url: your book url like https://bookdown.org/yihui/bookdown
 # cover-image: path to the social sharing image like images/cover.jpg
 description: |
-  This is the long-form documentation for the British Red Cross Resilience Index
+  This is the long-form documentation of the British Red Cross Resilience Index
 biblio-style: apalike
 csl: chicago-fullnote-bibliography.csl
 ---
