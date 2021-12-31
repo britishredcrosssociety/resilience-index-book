@@ -1,8 +1,8 @@
 bookdown::bs4_book:
   css: bs4_style.css
   theme:
-    primary: "#096B72"
-  repo: https://github.com/rstudio/bookdown-demo
+    primary: "#D0021B"
+  repo: https://github.com/britishredcrosssociety/resilience-index-book
 bookdown::pdf_book:
   includes:
     in_header: preamble.tex
