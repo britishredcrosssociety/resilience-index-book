@@ -13,7 +13,13 @@ biblio-style: apalike
 csl: chicago-fullnote-bibliography.csl
 ---
 
-# About
+# Welcome {.unnumbered}
 
-This book contains the long-form documentation of the British Red Cross
-Resilience Index[@ResilienceIndex].
+<img src="images/cover/cover.png" class="cover" width="250" height="250"/> This
+book contains the long-form documentation of the British Red Cross [Resilience
+Index](https://github.com/britishredcrosssociety/resilience-index). This book is a work in progress, and is intended for a
+late 2022 release.
+
+## License {.unnumbered}
+The license of the Resilience Index can be found in the [LICENSE](https://github.com/britishredcrosssociety/resilience-index/blob/main/LICENSE)
+file of the GitHub repository that hosts the code and data.
