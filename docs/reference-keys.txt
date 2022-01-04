@@ -1,1 +1,14 @@
 overview
+readme-overview
+how-to-find-metadata
+development-status
+interpreting-the-results-and-tables
+embed-html-widget-app
+technical
+models
+geography
+contributing
+repo-navigation
+journal-paper
+aggregration-techniques
+future

@@ -1,0 +1,14 @@
+# Technical
+
+## Models
+Sendai & Transactional model of stress. Indicator selection.
+
+## Geography
+
+## Contributing
+
+## Repo navigation
+
+## Journal paper
+
+## Aggregration techniques

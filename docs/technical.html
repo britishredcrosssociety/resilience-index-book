@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Welcome | Resilience Index Book</title>
+<title>Chapter 2 Technical | Resilience Index Book</title>
 <meta name="author" content="The British Red Cross">
-<meta name="description" content="This is the long-form documentation of the British Red Cross Resilience Index">
+<meta name="description" content="2.1 Models Sendai &amp; Transactional model of stress. Indicator selection.  2.2 Geography   2.3 Contributing   2.4 Repo navigation   2.5 Journal paper   2.6 Aggregration techniques">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Welcome | Resilience Index Book">
+<meta property="og:title" content="Chapter 2 Technical | Resilience Index Book">
 <meta property="og:type" content="book">
-<meta property="og:description" content="This is the long-form documentation of the British Red Cross Resilience Index">
+<meta property="og:description" content="2.1 Models Sendai &amp; Transactional model of stress. Indicator selection.  2.2 Geography   2.3 Contributing   2.4 Repo navigation   2.5 Journal paper   2.6 Aggregration techniques">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Welcome | Resilience Index Book">
-<meta name="twitter:description" content="This is the long-form documentation of the British Red Cross Resilience Index">
+<meta name="twitter:title" content="Chapter 2 Technical | Resilience Index Book">
+<meta name="twitter:description" content="2.1 Models Sendai &amp; Transactional model of stress. Indicator selection.  2.2 Geography   2.3 Contributing   2.4 Repo navigation   2.5 Journal paper   2.6 Aggregration techniques">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -39,9 +39,9 @@
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
-<li><a class="active" href="index.html">Welcome</a></li>
+<li><a class="" href="index.html">Welcome</a></li>
 <li><a class="" href="overview.html"><span class="header-section-number">1</span> Overview</a></li>
-<li><a class="" href="technical.html"><span class="header-section-number">2</span> Technical</a></li>
+<li><a class="active" href="technical.html"><span class="header-section-number">2</span> Technical</a></li>
 <li><a class="" href="future.html"><span class="header-section-number">3</span> Future</a></li>
 </ul>
 
@@ -50,42 +50,62 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><!--bookdown:title:end--><!--bookdown:title:start--><div id="welcome" class="section level1 unnumbered" number="">
-<h1>Welcome<a class="anchor" aria-label="anchor" href="#welcome"><i class="fas fa-link"></i></a>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="technical" class="section level1" number="2">
+<h1>
+<span class="header-section-number">2</span> Technical<a class="anchor" aria-label="anchor" href="#technical"><i class="fas fa-link"></i></a>
 </h1>
-<p><img src="images/cover/cover.png" class="cover" width="250" height="250"> This
-book contains the long-form documentation of the British Red Cross <a href="https://github.com/britishredcrosssociety/resilience-index">Resilience
-Index</a>. It is a
-work in progress, and is intended for a late 2022 release.</p>
-<p>The book starts at Chapter <a href="overview.html#overview">1</a> with a top-level overview of the
-Resilience Index. If you only have time to read one chapter, make it this. This
-chapter should equip you with enough knowledge to broadly understand <em>what</em> the
-Resilience Index covers, <em>where</em> it covers, and <em>how</em> to interact with and
-interpret the outputs. Later chapters go into more depth about the methods and
-data sources used to build the index and are aimed at a technical audience.</p>
-<div id="license" class="section level2 unnumbered" number="">
-<h2>License<a class="anchor" aria-label="anchor" href="#license"><i class="fas fa-link"></i></a>
+<div id="models" class="section level2" number="2.1">
+<h2>
+<span class="header-section-number">2.1</span> Models<a class="anchor" aria-label="anchor" href="#models"><i class="fas fa-link"></i></a>
 </h2>
-<p>The license of the Resilience Index can be found in the
-<a href="https://github.com/britishredcrosssociety/resilience-index/blob/main/LICENSE">LICENSE</a>
-file of the GitHub repository that hosts the code and data.</p>
+<p>Sendai &amp; Transactional model of stress. Indicator selection.</p>
+</div>
+<div id="geography" class="section level2" number="2.2">
+<h2>
+<span class="header-section-number">2.2</span> Geography<a class="anchor" aria-label="anchor" href="#geography"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="contributing" class="section level2" number="2.3">
+<h2>
+<span class="header-section-number">2.3</span> Contributing<a class="anchor" aria-label="anchor" href="#contributing"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="repo-navigation" class="section level2" number="2.4">
+<h2>
+<span class="header-section-number">2.4</span> Repo navigation<a class="anchor" aria-label="anchor" href="#repo-navigation"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="journal-paper" class="section level2" number="2.5">
+<h2>
+<span class="header-section-number">2.5</span> Journal paper<a class="anchor" aria-label="anchor" href="#journal-paper"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="aggregration-techniques" class="section level2" number="2.6">
+<h2>
+<span class="header-section-number">2.6</span> Aggregration techniques<a class="anchor" aria-label="anchor" href="#aggregration-techniques"><i class="fas fa-link"></i></a>
+</h2>
 
 </div>
 </div>
   <div class="chapter-nav">
-<div class="empty"></div>
-<div class="next"><a href="overview.html"><span class="header-section-number">1</span> Overview</a></div>
+<div class="prev"><a href="overview.html"><span class="header-section-number">1</span> Overview</a></div>
+<div class="next"><a href="future.html"><span class="header-section-number">3</span> Future</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#welcome">Welcome</a></li>
-<li><a class="nav-link" href="#license">License</a></li>
+<li><a class="nav-link" href="#technical"><span class="header-section-number">2</span> Technical</a></li>
+<li><a class="nav-link" href="#models"><span class="header-section-number">2.1</span> Models</a></li>
+<li><a class="nav-link" href="#geography"><span class="header-section-number">2.2</span> Geography</a></li>
+<li><a class="nav-link" href="#contributing"><span class="header-section-number">2.3</span> Contributing</a></li>
+<li><a class="nav-link" href="#repo-navigation"><span class="header-section-number">2.4</span> Repo navigation</a></li>
+<li><a class="nav-link" href="#journal-paper"><span class="header-section-number">2.5</span> Journal paper</a></li>
+<li><a class="nav-link" href="#aggregration-techniques"><span class="header-section-number">2.6</span> Aggregration techniques</a></li>
 </ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/britishredcrosssociety/resilience-index-book/blob/master/index.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/britishredcrosssociety/resilience-index-book/edit/master/index.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/britishredcrosssociety/resilience-index-book/blob/master/02-technical.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/britishredcrosssociety/resilience-index-book/edit/master/02-technical.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>

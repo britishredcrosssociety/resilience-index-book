@@ -1,4 +1,14 @@
 # Overview {#overview}
 
-This page will contain a general overview of the Resilience Index. Use the
-main repo README and presentation as a template
+The below is a current suggestion for the template:
+
+## README Overview
+Include only light details on Sendai Framework and Transactional model of stress
+
+## How to find metadata
+
+## Development Status
+
+## Interpreting the results and tables
+
+## Embed HTML Widget app
