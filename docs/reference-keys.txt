@@ -11,8 +11,6 @@ contributing
 repo-navigation
 journal-paper
 aggregration-techniques
-future
-url-your-book-url-like-httpsbookdown.orgyihuibookdown
 health-capacity---england
 public-health-england-catchment-calculations
 dealing-with-changes-in-trust-codes
@@ -25,3 +23,4 @@ dealing-with-missing-ae-data
 dealing-not-all-trusts-providing-service
 cqc-surveys
 summary-of-methods
+future
