@@ -9,3 +9,8 @@ This repo hosts the source code for the Resilience Index Book, the long-form doc
 British Red Cross [Resilience Index](https://github.com/britishredcrosssociety/resilience-index).
 
 
+## Deploying the book
+To add changes:
+- Run  `bookdown::render_book()`
+- Check the book has built without errors by running a local version using `bookdown::serve_book()`
+- Push changes to the main branch on GitHub to automatically updated the live book (via GitHub pages)
