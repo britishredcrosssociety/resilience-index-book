@@ -89,7 +89,7 @@
 <span class="header-section-number">3.6.1.0.1</span> Public Health England catchment calculations<a class="anchor" aria-label="anchor" href="#public-health-england-catchment-calculations"><i class="fas fa-link"></i></a>
 </h5>
 <p>Public Health England (PHE) have collected data on the number of patients (elective and emergency) who are admitted from a Middle Super Output Area (MSOA) to a given NHS Trust, and also the number of people from a MSOA to any provider. This gives the proportion of the MSOA patients at each Trust.<a href="https://app.box.com/s/qh8gzpzeo1firv1ezfxx2e6c4tgtrudl">1</a></p>
-<div class="inline-figure"><img src="images/technical/aggregation_techniques/msoa_split_by_trusts.png"></div>
+<div class="inline-figure"><img src="images/technical/aggregation_techniques/msoa_split_by_trusts.png" style="width:90.0%"></div>
 <p>These proportions were multiplied by the MSOA population (from ONS population numbers) to give the MSOA catchment population for a provider, and then these MSOA catchments were summed across each Trust to give a Trust catchment population.<a href="https://app.box.com/s/qh8gzpzeo1firv1ezfxx2e6c4tgtrudl">1</a> In the above example if the MSOA population is 1,000 then the estimated catchment for Trust A for MSOA 1 is 400 people.</p>
 <p>Note that in the data the porportions don’t always sum to 100% when summed across each MSOA. Contacting PHE to enquire about this.</p>
 <p>Since have both the Trust catchment population and the MSOA catchments for a Trust can estimate the split of Trust population by MSOAs.</p>
@@ -127,8 +127,8 @@
 <h5>
 <span class="header-section-number">3.6.1.2.1</span> Dealing not all Trusts providing data <a name="dealing-with-not-all-trusts-providing-data"></a><a class="anchor" aria-label="anchor" href="#dealing-not-all-trusts-providing-data"><i class="fas fa-link"></i></a>
 </h5>
-<p>For the SHMI data only acute non-specialists trusts report this data and so the weights were re-calcated to give the proportion based on acute non-specialist patients. In the example below Trust D is a specialist trust and therefore does not report on SHMI</p>
-<div class="inline-figure"><img src="images/technical/aggregation_techniques/trust_not_reporting.png"></div>
+<p>For the SHMI data only acute non-specialists trusts report this data and so the weights were re-calculated to give the proportion based on acute non-specialist patients. In the example below Trust D is a specialist trust and therefore does not report on SHMI</p>
+<div class="inline-figure"><img src="images/technical/aggregation_techniques/trust_not_reporting.png" style="width:90.0%"></div>
 <p>The calculations of the new population proportions for this example were as follows:</p>
 <div class="inline-table"><table class="table table-sm">
 <thead><tr class="header">
@@ -233,7 +233,7 @@
 <h4>
 <span class="header-section-number">3.6.1.6</span> Dealing not all Trusts providing service<a class="anchor" aria-label="anchor" href="#dealing-not-all-trusts-providing-service"><i class="fas fa-link"></i></a>
 </h4>
-<p>5 open trusts did not have A&amp;E waiting times data due to them being specalist and so potentially not having an A&amp;E service. For this a similar approach of re-calculating proportions as <a href="#dealing-with-not-all-trusts-providing-data">here</a> was taken.</p>
+<p>5 open trusts did not have A&amp;E waiting times data due to them being specialist and so potentially not having an A&amp;E service. For this a similar approach of re-calculating proportions as <a href="#dealing-with-not-all-trusts-providing-data">here</a> was taken.</p>
 </div>
 <div id="cqc-surveys" class="section level4" number="3.6.1.7">
 <h4>
@@ -246,14 +246,14 @@
 <li>Community mental health</li>
 </ul>
 <p>COVID inpatient survey was dated 2020 but was not broken down by Trust.</p>
-<p>As of Nov 2021 there were other service curveys that further in past (and so not included, however they are scheduled for updated data and so may look to be included in updated of the RI):</p>
+<p>As of Nov 2021 there were other service surveys that further in past (and so not included, however they are scheduled for updated data and so may look to be included in updated of the RI):</p>
 <ul>
 <li>Maternity (2019)</li>
 <li>Children &amp; young people (2018)</li>
 <li>Ambulance (2013/14)</li>
 <li>Outpatient (2011)</li>
 </ul>
-<p>For the surveys taken these were averaged, weighted by the number of responders of each of the services (noting these weightings may not be reflective of the respective sizes of the services provided by each Trust). Some of the Trusts had no survey responses, as they may not have provided the services asked about in the surveys. For this a similar approach of re-calculating proportions as <a href="#dealing-with-not-all-trusts-providing-data">here</a> was taken</p>
+<p>For the surveys taken these were averaged, weighted by the number of people who responded of each of the services (noting these weightings may not be reflective of the respective sizes of the services provided by each Trust). Some of the Trusts had no survey responses, as they may not have provided the services asked about in the surveys. For this a similar approach of re-calculating proportions as <a href="#dealing-with-not-all-trusts-providing-data">here</a> was taken</p>
 </div>
 </div>
 <div id="summary-of-methods" class="section level3" number="3.6.2">
@@ -269,7 +269,7 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td>Carers allowence</td>
+<td>Carers allowance</td>
 <td>Trust</td>
 <td>Trust to LAD</td>
 <td>Per capita</td>

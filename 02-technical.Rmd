@@ -21,7 +21,7 @@ There are additional complexities for the indicator data used within the capacit
 
 Public Health England (PHE) have collected data on the number of patients (elective and emergency) who are admitted from a Middle Super Output Area (MSOA) to a given NHS Trust, and also the number of people from a MSOA to any provider. This gives the proportion of the MSOA patients at each Trust.[1](https://app.box.com/s/qh8gzpzeo1firv1ezfxx2e6c4tgtrudl) 
 
-![](images/technical/aggregation_techniques/msoa_split_by_trusts.png)
+![](images/technical/aggregation_techniques/msoa_split_by_trusts.png){width=90%}
 
 These proportions were multiplied by the MSOA population (from ONS population numbers) to give the MSOA catchment population for a provider, and then these MSOA catchments were summed across each Trust to give a Trust catchment population.[1](https://app.box.com/s/qh8gzpzeo1firv1ezfxx2e6c4tgtrudl) In the above example if the MSOA population is 1,000 then the estimated catchment for Trust A for MSOA 1 is 400 people. 
 
@@ -63,9 +63,10 @@ For example if for LAD 1, 40% of the population is attributed to Trust A (which 
 
 ##### Dealing not all Trusts providing data <a name="dealing-with-not-all-trusts-providing-data"></a>
 
-For the SHMI data only acute non-specialists trusts report this data and so the weights were re-calcated to give the proportion based on acute non-specialist patients. In the example below Trust D is a specialist trust and therefore does not report on SHMI 
+For the SHMI data only acute non-specialists trusts report this data and so the weights were re-calculated to give the proportion based on acute non-specialist patients. In the example below Trust D is a specialist trust and therefore does not report on SHMI 
 
-![](images/technical/aggregation_techniques/trust_not_reporting.png)
+
+![](images/technical/aggregation_techniques/trust_not_reporting.png){width=90%}
 
 The calculations of the new population proportions for this example were as follows: 
 
@@ -133,7 +134,7 @@ The following imputation method was used to estimate the % of those waiting long
 
 #### Dealing not all Trusts providing service 
 
-5 open trusts did not have A&E waiting times data due to them being specalist and so potentially not having an A&E service. For this a similar approach of re-calculating proportions as [here](#dealing-with-not-all-trusts-providing-data) was taken.
+5 open trusts did not have A&E waiting times data due to them being specialist and so potentially not having an A&E service. For this a similar approach of re-calculating proportions as [here](#dealing-with-not-all-trusts-providing-data) was taken.
 
 #### CQC surveys
 For the CQC survey indicator there were different surveys for different services. Some were dated 2020 and therefore included:
@@ -144,21 +145,21 @@ For the CQC survey indicator there were different surveys for different services
 
 COVID inpatient survey was dated 2020 but was not broken down by Trust. 
 
-As of Nov 2021 there were other service curveys that further in past (and so not included, however they are scheduled for updated data and so may look to be included in updated of the RI):
+As of Nov 2021 there were other service surveys that further in past (and so not included, however they are scheduled for updated data and so may look to be included in updated of the RI):
 
 * Maternity (2019)
 * Children & young people (2018)
 * Ambulance (2013/14)
 * Outpatient (2011)
 
-For the surveys taken these were averaged, weighted by the number of responders of each of the services (noting these weightings may not be reflective of the respective sizes of the services provided by each Trust). Some of the Trusts had no survey responses, as they may not have provided the services asked about in the surveys. For this a similar approach of re-calculating proportions as [here](#dealing-with-not-all-trusts-providing-data) was taken
+For the surveys taken these were averaged, weighted by the number of people who responded of each of the services (noting these weightings may not be reflective of the respective sizes of the services provided by each Trust). Some of the Trusts had no survey responses, as they may not have provided the services asked about in the surveys. For this a similar approach of re-calculating proportions as [here](#dealing-with-not-all-trusts-providing-data) was taken
 
 
 ### Summary of methods
 
 | Indicator | Geography level of data  |  Mapping steps |  Normalised at LAD level |
 |---|---|---|---|
-|  Carers allowence | Trust  | Trust to LAD | Per capita |
+|  Carers allowance | Trust  | Trust to LAD | Per capita |
 |  Bed availability |  Trust | Trust to LAD | Per capita |
 |  Waiting over 13 weeks |  Trust | Trust to LAD | Total waiting list |
 | GP registrations  | LAD  | N/A | Per capita |
