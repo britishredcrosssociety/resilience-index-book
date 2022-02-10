@@ -96,7 +96,7 @@
 <p>Public Health England (PHE) have collected data on the number of patients (elective and emergency) who are admitted from a Middle Super Output Area (MSOA) to a given NHS Trust, and also the number of people from a MSOA to any provider. This gives the proportion of the MSOA patients at each Trust.<a href="https://app.box.com/s/qh8gzpzeo1firv1ezfxx2e6c4tgtrudl">1</a></p>
 <div class="inline-figure"><img src="images/technical/aggregation_techniques/msoa_split_by_trusts.png" style="width:90.0%"></div>
 <p>These proportions were multiplied by the MSOA population (from ONS population numbers) to give the MSOA catchment population for a provider, and then these MSOA catchments were summed across each Trust to give a Trust catchment population.<a href="https://app.box.com/s/qh8gzpzeo1firv1ezfxx2e6c4tgtrudl">1</a> In the above example if the MSOA population is 1,000 then the estimated catchment for Trust A for MSOA 1 is 400 people.</p>
-<p>Note that in the data the porportions don’t always sum to 100% when summed across each MSOA. Contacting PHE to enquire about this.</p>
+<p>Note that in the data the proportions don’t always sum to 100% when summed across each MSOA. Contacting PHE to find out more about this.</p>
 <p>Since have both the Trust catchment population and the MSOA catchments for a Trust can estimate the split of Trust population by MSOAs.</p>
 <p>This data can be used to <strong>estimate</strong>:</p>
 <ul>
@@ -112,8 +112,8 @@
 <span class="header-section-number">2.6.1.1</span> Dealing with changes in Trust codes <a name="dealing-with-changes-in-trust-codes"></a><a class="anchor" aria-label="anchor" href="#dealing-with-changes-in-trust-codes"><i class="fas fa-link"></i></a>
 </h4>
 <p>Trust codes can change because Trusts can combine and disaggregate over time.</p>
-<p>The geographr package <a href="https://github.com/britishredcrosssociety/geographr">2</a> has a script which deals with updating trust codes <a href="https://github.com/britishredcrosssociety/geographr/blob/main/data-raw/lookup_trust_msoa.R">here</a>. This logic was used in the <em>‘trust_changes.R’</em> file to create <em>‘trust_changes.feather’</em> dataset which could be used to check changes in Trust codes.</p>
-<p>Checks were done to see if any Trust codes were found in the PHE England catchment calculations but not in the trusts defined as open in the geographr package <a href="https://github.com/britishredcrosssociety/geographr/blob/main/data-raw/points_nhs_trusts.R">3</a> and vice versa <a href="https://github.com/britishredcrosssociety/resilience-index/blob/28763b0fa47e4c02bc945950f39e8696f831fd52/R/capacity/health-inequalities/england/trust_types/trust_msoa_lad_catchments.R#L48">here</a>. Any changes were updated in the PHE England catchment calculations and saved as <em>lookup_trust_lad.feather</em>.</p>
+<p>The geographr package <a href="https://github.com/britishredcrosssociety/geographr">2</a> has a script which deals with updating trust codes <a href="https://github.com/britishredcrosssociety/geographr/blob/main/data-raw/lookup_trust_msoa.R">here</a>. This logic was used in the <em>‘trust_changes.R’</em> file to create <em>‘trust_changes.rds’</em> dataset which could be used to check changes in Trust codes.</p>
+<p>Checks were done to see if any Trust codes were found in the PHE England catchment calculations but not in the trusts defined as open in the geographr package <a href="https://github.com/britishredcrosssociety/geographr/blob/main/data-raw/points_nhs_trusts.R">3</a> and vice versa <a href="https://github.com/britishredcrosssociety/resilience-index/blob/28763b0fa47e4c02bc945950f39e8696f831fd52/R/capacity/health-inequalities/england/trust_types/trust_msoa_lad_catchments.R#L48">here</a>. Any changes were updated in the PHE England catchment calculations and saved as <em>lookup_trust_lad.rds</em>.</p>
 </div>
 <div id="relative-value-indicators" class="section level4" number="2.6.1.2">
 <h4>
@@ -265,7 +265,7 @@
 <li>Ambulance (2013/14)</li>
 <li>Outpatient (2011)</li>
 </ul>
-<p>For the surveys taken these were averaged, weighted by the number of people who responded of each of the services (noting these weightings may not be reflective of the respective sizes of the services provided by each Trust). Some of the Trusts had no survey responses, as they may not have provided the services asked about in the surveys. For this a similar approach of re-calculating proportions as <a href="#dealing-with-not-all-trusts-providing-data">here</a> was taken</p>
+<p>For the surveys taken these were averaged, weighted by the number of people who responded of each of the services (noting these weightings may not be reflective of the respective sizes of the services provided by each Trust). Some of the Trusts had no survey responses, as they may not have provided the services asked about in the surveys. For this a similar approach of re-calculating proportions as <a href="#dealing-with-not-all-trusts-providing-data">here</a> was taken.</p>
 </div>
 </div>
 <div id="summary-of-methods" class="section level3" number="2.6.2">
@@ -392,7 +392,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Resilience Index Book</strong>" was written by The British Red Cross. It was last built on 2022-02-01.</p>
+    <p>"<strong>Resilience Index Book</strong>" was written by The British Red Cross. It was last built on 2022-02-10.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

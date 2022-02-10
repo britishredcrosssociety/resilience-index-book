@@ -1,7 +1,7 @@
 --- 
 title: "Resilience Index Book"
 author: "The British Red Cross"
-date: "2022-02-01"
+date: "2022-02-10"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib]

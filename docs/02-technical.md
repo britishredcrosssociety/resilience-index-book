@@ -25,7 +25,7 @@ Public Health England (PHE) have collected data on the number of patients (elect
 
 These proportions were multiplied by the MSOA population (from ONS population numbers) to give the MSOA catchment population for a provider, and then these MSOA catchments were summed across each Trust to give a Trust catchment population.[1](https://app.box.com/s/qh8gzpzeo1firv1ezfxx2e6c4tgtrudl) In the above example if the MSOA population is 1,000 then the estimated catchment for Trust A for MSOA 1 is 400 people. 
 
-Note that in the data the porportions don't always sum to 100% when summed across each MSOA. Contacting PHE to enquire about this. 
+Note that in the data the proportions don't always sum to 100% when summed across each MSOA. Contacting PHE to find out more about this. 
 
 Since have both the Trust catchment population and the MSOA catchments for a Trust can estimate the split of Trust population by MSOAs. 
 
@@ -43,9 +43,9 @@ Also important to note that the data only includes acute Trusts and so does not 
 #### Dealing with changes in Trust codes <a name="dealing-with-changes-in-trust-codes"></a>
 Trust codes can change because Trusts can combine and disaggregate over time. 
 
-The geographr package [2](https://github.com/britishredcrosssociety/geographr) has a script which deals with updating trust codes [here](https://github.com/britishredcrosssociety/geographr/blob/main/data-raw/lookup_trust_msoa.R). This logic was used in the *'trust_changes.R'* file to create *'trust_changes.feather'* dataset which could be used to check changes in Trust codes. 
+The geographr package [2](https://github.com/britishredcrosssociety/geographr) has a script which deals with updating trust codes [here](https://github.com/britishredcrosssociety/geographr/blob/main/data-raw/lookup_trust_msoa.R). This logic was used in the *'trust_changes.R'* file to create *'trust_changes.rds'* dataset which could be used to check changes in Trust codes. 
 
-Checks were done to see if any Trust codes were found in the PHE England catchment calculations but not in the trusts defined as open in the geographr package [3](https://github.com/britishredcrosssociety/geographr/blob/main/data-raw/points_nhs_trusts.R) and vice versa [here](https://github.com/britishredcrosssociety/resilience-index/blob/28763b0fa47e4c02bc945950f39e8696f831fd52/R/capacity/health-inequalities/england/trust_types/trust_msoa_lad_catchments.R#L48). Any changes were updated in the PHE England catchment calculations and saved as *lookup\_trust_lad.feather*. 
+Checks were done to see if any Trust codes were found in the PHE England catchment calculations but not in the trusts defined as open in the geographr package [3](https://github.com/britishredcrosssociety/geographr/blob/main/data-raw/points_nhs_trusts.R) and vice versa [here](https://github.com/britishredcrosssociety/resilience-index/blob/28763b0fa47e4c02bc945950f39e8696f831fd52/R/capacity/health-inequalities/england/trust_types/trust_msoa_lad_catchments.R#L48). Any changes were updated in the PHE England catchment calculations and saved as *lookup\_trust_lad.rds*. 
 
 
 #### Relative value indicators
@@ -152,7 +152,7 @@ As of Nov 2021 there were other service surveys that further in past (and so not
 * Ambulance (2013/14)
 * Outpatient (2011)
 
-For the surveys taken these were averaged, weighted by the number of people who responded of each of the services (noting these weightings may not be reflective of the respective sizes of the services provided by each Trust). Some of the Trusts had no survey responses, as they may not have provided the services asked about in the surveys. For this a similar approach of re-calculating proportions as [here](#dealing-with-not-all-trusts-providing-data) was taken
+For the surveys taken these were averaged, weighted by the number of people who responded of each of the services (noting these weightings may not be reflective of the respective sizes of the services provided by each Trust). Some of the Trusts had no survey responses, as they may not have provided the services asked about in the surveys. For this a similar approach of re-calculating proportions as [here](#dealing-with-not-all-trusts-providing-data) was taken.
 
 
 ### Summary of methods
