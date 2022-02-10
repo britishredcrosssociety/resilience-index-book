@@ -16,19 +16,25 @@ The Resilience Index maps **Local Authorities** in each of the four devolved nat
 - **Twelve** maps/scores in total. **Three** indices, across **four** nations.
 - Each map is specific to a single cause and nation and presents a resilience score:
 
-<img src='images/overview/output-map.png' align="centre"/>
+```r
+knitr::include_graphics("images/overview/output-map.png")
+```
 
 ## Output (Tables)
 
 - Data tables will also be available with indicator scores, domain scores, vulnerability & capacity scores, and overall resilience scores:
 
-<img src='images/overview/output-table.png' align="centre"/>
+```r
+knitr::include_graphics("images/overview/output-table.png")
+```
 
 ## Calculating Resilience
 
 - **Indicators** are combined to **form domain**s, which are **then combined to** form capacity & vulnerability **scores**, which are then compared side-by-side to form a resilience score.
 
-<img src='images/overview/tree-diagram.png' align="centre"/>
+```r
+knitr::include_graphics("images/overview/tree-diagram.png")
+```
 
 ## FAQ
 
