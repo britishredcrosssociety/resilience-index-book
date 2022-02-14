@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 2 Technical | Resilience Index Book</title>
 <meta name="author" content="The British Red Cross">
-<meta name="description" content="2.1 Models Sendai &amp; Transactional model of stress. Indicator selection.  2.2 Geography   2.3 Contributing   2.4 Repo navigation   2.5 Journal paper   2.6 Aggregration techniques  2.6.1 Health...">
+<meta name="description" content="2.1 Aligning Indicators  2.1.1 Final outputs To match user expectation and to build a simple mental model, higher should mean higher. This means: - Higher vulnerability deciles/ranks = higher...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
 <meta property="og:title" content="Chapter 2 Technical | Resilience Index Book">
 <meta property="og:type" content="book">
-<meta property="og:description" content="2.1 Models Sendai &amp; Transactional model of stress. Indicator selection.  2.2 Geography   2.3 Contributing   2.4 Repo navigation   2.5 Journal paper   2.6 Aggregration techniques  2.6.1 Health...">
+<meta property="og:description" content="2.1 Aligning Indicators  2.1.1 Final outputs To match user expectation and to build a simple mental model, higher should mean higher. This means: - Higher vulnerability deciles/ranks = higher...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 2 Technical | Resilience Index Book">
-<meta name="twitter:description" content="2.1 Models Sendai &amp; Transactional model of stress. Indicator selection.  2.2 Geography   2.3 Contributing   2.4 Repo navigation   2.5 Journal paper   2.6 Aggregration techniques  2.6.1 Health...">
+<meta name="twitter:description" content="2.1 Aligning Indicators  2.1.1 Final outputs To match user expectation and to build a simple mental model, higher should mean higher. This means: - Higher vulnerability deciles/ranks = higher...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -54,44 +54,123 @@
 <h1>
 <span class="header-section-number">2</span> Technical<a class="anchor" aria-label="anchor" href="#technical"><i class="fas fa-link"></i></a>
 </h1>
-<div id="models" class="section level2" number="2.1">
+<div id="aligning-indicators" class="section level2" number="2.1">
 <h2>
-<span class="header-section-number">2.1</span> Models<a class="anchor" aria-label="anchor" href="#models"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.1</span> Aligning Indicators<a class="anchor" aria-label="anchor" href="#aligning-indicators"><i class="fas fa-link"></i></a>
+</h2>
+<div id="final-outputs" class="section level3" number="2.1.1">
+<h3>
+<span class="header-section-number">2.1.1</span> Final outputs<a class="anchor" aria-label="anchor" href="#final-outputs"><i class="fas fa-link"></i></a>
+</h3>
+<p>To match user expectation and to build a simple mental model, higher should mean
+higher. This means:<br>
+- <strong>Higher</strong> vulnerability deciles/ranks = <strong>higher</strong> vulnerability<br>
+- <strong>Higher</strong> capacity deciles/ranks = <strong>higher</strong> capacity</p>
+<p>Most users, however, will want to know areas with the <em>highest</em> vulnerability and
+the <em>lowest</em> capacity. Well designed plots and maps should guide to user to these
+areas without challenging the mental model of higher is higher. For example, a
+bivariate choropleth map might highlight areas of high vulnerability and low
+capacity in a dark colour, with the inverse of these areas in a light colour. The
+colour gradient should direct the users attention and keep the mental model intact.</p>
+</div>
+<div id="misalignment" class="section level3" number="2.1.2">
+<h3>
+<span class="header-section-number">2.1.2</span> Misalignment<a class="anchor" aria-label="anchor" href="#misalignment"><i class="fas fa-link"></i></a>
+</h3>
+<p>Despite the end goal for the final outputs, indicators do not always align in the
+direction of their scales for the domain they underpin. For example, in the model
+of England Health Capacity, <em>higher</em> bed availability represents <em>higher</em> capacity,
+yet <em>higher</em> ambulance response waiting times represent <em>lower</em> capacity. To
+control for this, indicators need inverting at several stages during the computation
+of the indices to ensure concistency in development methods, and alignment of the
+final outputs.</p>
+</div>
+<div id="stage-1-indicator-files" class="section level3" number="2.1.3">
+<h3>
+<span class="header-section-number">2.1.3</span> Stage 1: indicator files<a class="anchor" aria-label="anchor" href="#stage-1-indicator-files"><i class="fas fa-link"></i></a>
+</h3>
+<p>Each indicator of each domain for both resilience and capacity resides in its
+own unique file. To make these modular files usable across projects and to ease
+in updating and understanding them, the output of each file should be aligned to
+the <em>expected</em> direction given by the indicator name. Using the same example from
+above for capacity, higher scores in the output of the file <code>bed-availability.R</code> should indicate
+higher availability, and higher scores in the output of the file <code>ambulance-waiting-times.R</code>
+should indicate higher waiting times. Note, that these two indicators do not yet
+align to the goal that a <strong>higher</strong> score equals <strong>higher</strong> capacity. This should
+be tackled in the later <code>build-index.R</code> filer where indicators are combined.</p>
+<p>For any indicators that have been aggregated from a lower level geography to a
+higher level geography using the <code>calculate_extent()</code> function, it is important
+that the argument <code>invert_percentiles</code> is set correctly. For any indicators in the
+vulnerability models, the argument should be set to <code>TRUE</code>, so that a higher
+score equates to a worst outcome. For any indicators in the capacity models, the
+argument should be set to <code>FALSE</code>, so that a lower score equates to a worse outcome.</p>
+</div>
+<div id="stage-2-join-indicators" class="section level3" number="2.1.4">
+<h3>
+<span class="header-section-number">2.1.4</span> Stage 2: join indicators<a class="anchor" aria-label="anchor" href="#stage-2-join-indicators"><i class="fas fa-link"></i></a>
+</h3>
+<p>Each index contains a <code>build-index.R</code> file in the root of the specific index folder.
+The first step of these build scripts is to align indicators. This achieved by
+mutiplying misaligned indicators by -1.</p>
+<p>For any vulnerability build script, the indicators should be aligned so that a
+<strong>higher</strong> score equals to <strong>higher</strong> vulnerability. For example the indicator
+<code>mean_vaccine_rate</code> should be multiplied by -1.</p>
+<p>For any capacity build script, the indicators should be aligned so that a <strong>higher</strong>
+score equals a <strong>lower</strong> capacity. Note, this does not align the capacity indicators
+to the format desired for the output. This gets taken care of in stage 3, detailed
+below. The reason the indicators needs to be aligned like this is to keep consistency
+in methods across the vulnerability and capacity models. For example, later in the
+<code>build-index.R</code> scripts, data is log-transformed to highlight areas of most need.
+In the case of capacity, this is areas of <em>lowest</em> capacity, and in the case of
+vulnerability, this is the areas of the <em>highest</em> vulnerability.</p>
+</div>
+</div>
+<div id="stage-3-realign-files-ranks-deciles" class="section level2" number="2.2">
+<h2>
+<span class="header-section-number">2.2</span> Stage 3: realign files ranks &amp; deciles<a class="anchor" aria-label="anchor" href="#stage-3-realign-files-ranks-deciles"><i class="fas fa-link"></i></a>
+</h2>
+<p>Capacity models require a final step of inverting ranks and deciles so that
+<strong>higher scores</strong> equal <strong>higher capacity</strong>. This can be achieved using the series
+of <code>inver*</code> functions in <code>R/utils.R</code></p>
+</div>
+<div id="models" class="section level2" number="2.3">
+<h2>
+<span class="header-section-number">2.3</span> Models<a class="anchor" aria-label="anchor" href="#models"><i class="fas fa-link"></i></a>
 </h2>
 <p>Sendai &amp; Transactional model of stress. Indicator selection.</p>
 </div>
-<div id="geography" class="section level2" number="2.2">
+<div id="geography" class="section level2" number="2.4">
 <h2>
-<span class="header-section-number">2.2</span> Geography<a class="anchor" aria-label="anchor" href="#geography"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.4</span> Geography<a class="anchor" aria-label="anchor" href="#geography"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="contributing" class="section level2" number="2.3">
+<div id="contributing" class="section level2" number="2.5">
 <h2>
-<span class="header-section-number">2.3</span> Contributing<a class="anchor" aria-label="anchor" href="#contributing"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.5</span> Contributing<a class="anchor" aria-label="anchor" href="#contributing"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="repo-navigation" class="section level2" number="2.4">
+<div id="repo-navigation" class="section level2" number="2.6">
 <h2>
-<span class="header-section-number">2.4</span> Repo navigation<a class="anchor" aria-label="anchor" href="#repo-navigation"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.6</span> Repo navigation<a class="anchor" aria-label="anchor" href="#repo-navigation"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="journal-paper" class="section level2" number="2.5">
+<div id="journal-paper" class="section level2" number="2.7">
 <h2>
-<span class="header-section-number">2.5</span> Journal paper<a class="anchor" aria-label="anchor" href="#journal-paper"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.7</span> Journal paper<a class="anchor" aria-label="anchor" href="#journal-paper"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="aggregration-techniques" class="section level2" number="2.6">
+<div id="aggregration-techniques" class="section level2" number="2.8">
 <h2>
-<span class="header-section-number">2.6</span> Aggregration techniques<a class="anchor" aria-label="anchor" href="#aggregration-techniques"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.8</span> Aggregration techniques<a class="anchor" aria-label="anchor" href="#aggregration-techniques"><i class="fas fa-link"></i></a>
 </h2>
-<div id="health-capacity---england" class="section level3" number="2.6.1">
+<div id="health-capacity---england" class="section level3" number="2.8.1">
 <h3>
-<span class="header-section-number">2.6.1</span> Health capacity - England<a class="anchor" aria-label="anchor" href="#health-capacity---england"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.8.1</span> Health capacity - England<a class="anchor" aria-label="anchor" href="#health-capacity---england"><i class="fas fa-link"></i></a>
 </h3>
 <p>There are additional complexities for the indicator data used within the capacity section of the health index for England. This is due to the fact that most of the data available was at NHS Trust level but the desired outcome of the index is at Local Authority Districts (i.e. Local Tier Local Authorities). NHS Trusts are not coterminous to LADs (or UTLAs, MSOA or LSOA etc.) or vice versa.</p>
-<div id="public-health-england-catchment-calculations" class="section level5" number="2.6.1.0.1">
+<div id="public-health-england-catchment-calculations" class="section level5" number="2.8.1.0.1">
 <h5>
-<span class="header-section-number">2.6.1.0.1</span> Public Health England catchment calculations<a class="anchor" aria-label="anchor" href="#public-health-england-catchment-calculations"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.8.1.0.1</span> Public Health England catchment calculations<a class="anchor" aria-label="anchor" href="#public-health-england-catchment-calculations"><i class="fas fa-link"></i></a>
 </h5>
 <p>Public Health England (PHE) have collected data on the number of patients (elective and emergency) who are admitted from a Middle Super Output Area (MSOA) to a given NHS Trust, and also the number of people from a MSOA to any provider. This gives the proportion of the MSOA patients at each Trust.<a href="https://app.box.com/s/qh8gzpzeo1firv1ezfxx2e6c4tgtrudl">1</a></p>
 <div class="inline-figure"><img src="images/technical/aggregation_techniques/msoa_split_by_trusts.png" style="width:90.0%"></div>
@@ -107,17 +186,17 @@
 <p>It is important to note this method is an estimate and is based on a sample of data.</p>
 <p>Also important to note that the data only includes acute Trusts and so does not have information on non-acute trusts such as community and mental health providers. Some of the indicators had data from these kind of Trusts and it was not possible at this time to attribute this information across LADs and therefore was not possible to add this to the index with this current method.</p>
 </div>
-<div id="dealing-with-changes-in-trust-codes" class="section level4" number="2.6.1.1">
+<div id="dealing-with-changes-in-trust-codes" class="section level4" number="2.8.1.1">
 <h4>
-<span class="header-section-number">2.6.1.1</span> Dealing with changes in Trust codes <a name="dealing-with-changes-in-trust-codes"></a><a class="anchor" aria-label="anchor" href="#dealing-with-changes-in-trust-codes"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.8.1.1</span> Dealing with changes in Trust codes <a name="dealing-with-changes-in-trust-codes"></a><a class="anchor" aria-label="anchor" href="#dealing-with-changes-in-trust-codes"><i class="fas fa-link"></i></a>
 </h4>
 <p>Trust codes can change because Trusts can combine and disaggregate over time.</p>
 <p>The geographr package <a href="https://github.com/britishredcrosssociety/geographr">2</a> has a script which deals with updating trust codes <a href="https://github.com/britishredcrosssociety/geographr/blob/main/data-raw/lookup_trust_msoa.R">here</a>. This logic was used in the <em>‘trust_changes.R’</em> file to create <em>‘trust_changes.rds’</em> dataset which could be used to check changes in Trust codes.</p>
 <p>Checks were done to see if any Trust codes were found in the PHE England catchment calculations but not in the trusts defined as open in the geographr package <a href="https://github.com/britishredcrosssociety/geographr/blob/main/data-raw/points_nhs_trusts.R">3</a> and vice versa <a href="https://github.com/britishredcrosssociety/resilience-index/blob/28763b0fa47e4c02bc945950f39e8696f831fd52/R/capacity/health-inequalities/england/trust_types/trust_msoa_lad_catchments.R#L48">here</a>. Any changes were updated in the PHE England catchment calculations and saved as <em>lookup_trust_lad.rds</em>.</p>
 </div>
-<div id="relative-value-indicators" class="section level4" number="2.6.1.2">
+<div id="relative-value-indicators" class="section level4" number="2.8.1.2">
 <h4>
-<span class="header-section-number">2.6.1.2</span> Relative value indicators<a class="anchor" aria-label="anchor" href="#relative-value-indicators"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.8.1.2</span> Relative value indicators<a class="anchor" aria-label="anchor" href="#relative-value-indicators"><i class="fas fa-link"></i></a>
 </h4>
 <p>Indicators which were dealt with using the following method:</p>
 <ul>
@@ -128,9 +207,9 @@
 </ul>
 <p>The LAD population proportioned to Trusts was used to do a weighted average of these indicators.</p>
 <p>For example if for LAD 1, 40% of the population is attributed to Trust A (which has a rating of 2) and 60% is attributed to Trust B (which has a rating of 4) then the weighted rating for LAD 1 is 0.4 * 2 + 0.6 * 4 = 3.2.</p>
-<div id="dealing-not-all-trusts-providing-data" class="section level5" number="2.6.1.2.1">
+<div id="dealing-not-all-trusts-providing-data" class="section level5" number="2.8.1.2.1">
 <h5>
-<span class="header-section-number">2.6.1.2.1</span> Dealing not all Trusts providing data <a name="dealing-with-not-all-trusts-providing-data"></a><a class="anchor" aria-label="anchor" href="#dealing-not-all-trusts-providing-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.8.1.2.1</span> Dealing not all Trusts providing data <a name="dealing-with-not-all-trusts-providing-data"></a><a class="anchor" aria-label="anchor" href="#dealing-not-all-trusts-providing-data"><i class="fas fa-link"></i></a>
 </h5>
 <p>For the SHMI data only acute non-specialists trusts report this data and so the weights were re-calculated to give the proportion based on acute non-specialist patients. In the example below Trust D is a specialist trust and therefore does not report on SHMI</p>
 <div class="inline-figure"><img src="images/technical/aggregation_techniques/trust_not_reporting.png" style="width:90.0%"></div>
@@ -182,16 +261,16 @@
 </tbody>
 </table></div>
 </div>
-<div id="dealing-with-data-at-county-level" class="section level5" number="2.6.1.2.2">
+<div id="dealing-with-data-at-county-level" class="section level5" number="2.8.1.2.2">
 <h5>
-<span class="header-section-number">2.6.1.2.2</span> Dealing with data at county level<a class="anchor" aria-label="anchor" href="#dealing-with-data-at-county-level"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.8.1.2.2</span> Dealing with data at county level<a class="anchor" aria-label="anchor" href="#dealing-with-data-at-county-level"><i class="fas fa-link"></i></a>
 </h5>
 <p>For the adult social care vacancies indicator the data was a mixture of LTLA (LAD) and UTLA (county) level. Where the data was only available at UTLA level assumption was made that all LADs within the county have the same vacancy rate.</p>
 </div>
 </div>
-<div id="raw-count-indicators" class="section level4" number="2.6.1.3">
+<div id="raw-count-indicators" class="section level4" number="2.8.1.3">
 <h4>
-<span class="header-section-number">2.6.1.3</span> Raw count indicators<a class="anchor" aria-label="anchor" href="#raw-count-indicators"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.8.1.3</span> Raw count indicators<a class="anchor" aria-label="anchor" href="#raw-count-indicators"><i class="fas fa-link"></i></a>
 </h4>
 <p>Indicators which were dealt with using the following method:</p>
 <ul>
@@ -216,9 +295,9 @@
 <li>Count of people waiting more than 4 hours in A&amp;E (divided by total number in A&amp;E).</li>
 </ul>
 </div>
-<div id="dealing-with-changes-in-trust-codes-in-indicator-data" class="section level4" number="2.6.1.4">
+<div id="dealing-with-changes-in-trust-codes-in-indicator-data" class="section level4" number="2.8.1.4">
 <h4>
-<span class="header-section-number">2.6.1.4</span> Dealing with changes in Trust codes in indicator data<a class="anchor" aria-label="anchor" href="#dealing-with-changes-in-trust-codes-in-indicator-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.8.1.4</span> Dealing with changes in Trust codes in indicator data<a class="anchor" aria-label="anchor" href="#dealing-with-changes-in-trust-codes-in-indicator-data"><i class="fas fa-link"></i></a>
 </h4>
 <p>As mentioned <a href="technical.html#dealing-with-changes-in-trust-codes">above</a> there was the challenge of changing Trust codes between the open trusts in geographr package, the PHE England catchment data and sometimes the indicator data (depending on the date of the data).</p>
 <p>In the following indicators had to deal with trust code changes:</p>
@@ -228,9 +307,9 @@
 </ul>
 <p>If updating the index in the future will need to check where cases the indicator data trusts codes don’t align with what is in the PHE England catchment calculations and use lookups to deal with these cases so able to join and attribute the data back to LADs.</p>
 </div>
-<div id="dealing-with-missing-ae-data" class="section level4" number="2.6.1.5">
+<div id="dealing-with-missing-ae-data" class="section level4" number="2.8.1.5">
 <h4>
-<span class="header-section-number">2.6.1.5</span> Dealing with missing A&amp;E data<a class="anchor" aria-label="anchor" href="#dealing-with-missing-ae-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.8.1.5</span> Dealing with missing A&amp;E data<a class="anchor" aria-label="anchor" href="#dealing-with-missing-ae-data"><i class="fas fa-link"></i></a>
 </h4>
 <p>There are 14 trusts that as of May 2019 don’t need to report on the A&amp;E waiting times (see page 3 <a href="https://www.england.nhs.uk/statistics/wp-content/uploads/sites/2/2021/12/Statistical-commentary-November-2021-jf8.pdf">here</a> and <a href="https://www.nationalhealthexecutive.com/News/fourteen-hospitals-chosen-to-pilot-new-ae-targets">here</a>). However they do still report on the total number of people in A&amp;E.</p>
 <p>The following imputation method was used to estimate the % of those waiting longer than 4 hours:</p>
@@ -241,15 +320,15 @@
 <li>Applied this estimated proportion to the total number of people in A&amp;E to estimate the number of people waiting over 4 hours.</li>
 </ul>
 </div>
-<div id="dealing-not-all-trusts-providing-service" class="section level4" number="2.6.1.6">
+<div id="dealing-not-all-trusts-providing-service" class="section level4" number="2.8.1.6">
 <h4>
-<span class="header-section-number">2.6.1.6</span> Dealing not all Trusts providing service<a class="anchor" aria-label="anchor" href="#dealing-not-all-trusts-providing-service"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.8.1.6</span> Dealing not all Trusts providing service<a class="anchor" aria-label="anchor" href="#dealing-not-all-trusts-providing-service"><i class="fas fa-link"></i></a>
 </h4>
 <p>5 open trusts did not have A&amp;E waiting times data due to them being specialist and so potentially not having an A&amp;E service. For this a similar approach of re-calculating proportions as <a href="#dealing-with-not-all-trusts-providing-data">here</a> was taken.</p>
 </div>
-<div id="cqc-surveys" class="section level4" number="2.6.1.7">
+<div id="cqc-surveys" class="section level4" number="2.8.1.7">
 <h4>
-<span class="header-section-number">2.6.1.7</span> CQC surveys<a class="anchor" aria-label="anchor" href="#cqc-surveys"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.8.1.7</span> CQC surveys<a class="anchor" aria-label="anchor" href="#cqc-surveys"><i class="fas fa-link"></i></a>
 </h4>
 <p>For the CQC survey indicator there were different surveys for different services. Some were dated 2020 and therefore included:</p>
 <ul>
@@ -268,9 +347,9 @@
 <p>For the surveys taken these were averaged, weighted by the number of people who responded of each of the services (noting these weightings may not be reflective of the respective sizes of the services provided by each Trust). Some of the Trusts had no survey responses, as they may not have provided the services asked about in the surveys. For this a similar approach of re-calculating proportions as <a href="#dealing-with-not-all-trusts-providing-data">here</a> was taken.</p>
 </div>
 </div>
-<div id="summary-of-methods" class="section level3" number="2.6.2">
+<div id="summary-of-methods" class="section level3" number="2.8.2">
 <h3>
-<span class="header-section-number">2.6.2</span> Summary of methods<a class="anchor" aria-label="anchor" href="#summary-of-methods"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.8.2</span> Summary of methods<a class="anchor" aria-label="anchor" href="#summary-of-methods"><i class="fas fa-link"></i></a>
 </h3>
 <div class="inline-table"><table class="table table-sm">
 <colgroup>
@@ -364,15 +443,24 @@
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#technical"><span class="header-section-number">2</span> Technical</a></li>
-<li><a class="nav-link" href="#models"><span class="header-section-number">2.1</span> Models</a></li>
-<li><a class="nav-link" href="#geography"><span class="header-section-number">2.2</span> Geography</a></li>
-<li><a class="nav-link" href="#contributing"><span class="header-section-number">2.3</span> Contributing</a></li>
-<li><a class="nav-link" href="#repo-navigation"><span class="header-section-number">2.4</span> Repo navigation</a></li>
-<li><a class="nav-link" href="#journal-paper"><span class="header-section-number">2.5</span> Journal paper</a></li>
 <li>
-<a class="nav-link" href="#aggregration-techniques"><span class="header-section-number">2.6</span> Aggregration techniques</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#health-capacity---england"><span class="header-section-number">2.6.1</span> Health capacity - England</a></li>
-<li><a class="nav-link" href="#summary-of-methods"><span class="header-section-number">2.6.2</span> Summary of methods</a></li>
+<a class="nav-link" href="#aligning-indicators"><span class="header-section-number">2.1</span> Aligning Indicators</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#final-outputs"><span class="header-section-number">2.1.1</span> Final outputs</a></li>
+<li><a class="nav-link" href="#misalignment"><span class="header-section-number">2.1.2</span> Misalignment</a></li>
+<li><a class="nav-link" href="#stage-1-indicator-files"><span class="header-section-number">2.1.3</span> Stage 1: indicator files</a></li>
+<li><a class="nav-link" href="#stage-2-join-indicators"><span class="header-section-number">2.1.4</span> Stage 2: join indicators</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#stage-3-realign-files-ranks-deciles"><span class="header-section-number">2.2</span> Stage 3: realign files ranks &amp; deciles</a></li>
+<li><a class="nav-link" href="#models"><span class="header-section-number">2.3</span> Models</a></li>
+<li><a class="nav-link" href="#geography"><span class="header-section-number">2.4</span> Geography</a></li>
+<li><a class="nav-link" href="#contributing"><span class="header-section-number">2.5</span> Contributing</a></li>
+<li><a class="nav-link" href="#repo-navigation"><span class="header-section-number">2.6</span> Repo navigation</a></li>
+<li><a class="nav-link" href="#journal-paper"><span class="header-section-number">2.7</span> Journal paper</a></li>
+<li>
+<a class="nav-link" href="#aggregration-techniques"><span class="header-section-number">2.8</span> Aggregration techniques</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#health-capacity---england"><span class="header-section-number">2.8.1</span> Health capacity - England</a></li>
+<li><a class="nav-link" href="#summary-of-methods"><span class="header-section-number">2.8.2</span> Summary of methods</a></li>
 </ul>
 </li>
 </ul>
@@ -392,7 +480,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Resilience Index Book</strong>" was written by The British Red Cross. It was last built on 2022-02-10.</p>
+    <p>"<strong>Resilience Index Book</strong>" was written by The British Red Cross. It was last built on 2022-02-14.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

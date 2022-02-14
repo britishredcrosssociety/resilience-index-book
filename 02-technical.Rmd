@@ -1,5 +1,76 @@
 # Technical
 
+## Aligning Indicators
+
+### Final outputs
+
+To match user expectation and to build a simple mental model, higher should mean
+higher. This means:  
+- **Higher** vulnerability deciles/ranks = **higher** vulnerability  
+- **Higher** capacity deciles/ranks = **higher** capacity
+
+Most users, however, will want to know areas with the *highest* vulnerability and
+the *lowest* capacity. Well designed plots and maps should guide to user to these
+areas without challenging the mental model of higher is higher. For example, a
+bivariate choropleth map might highlight areas of high vulnerability and low
+capacity in a dark colour, with the inverse of these areas in a light colour. The
+colour gradient should direct the users attention and keep the mental model intact.
+
+### Misalignment
+
+Despite the end goal for the final outputs, indicators do not always align in the
+direction of their scales for the domain they underpin. For example, in the model
+of England Health Capacity, *higher* bed availability represents *higher* capacity,
+yet *higher* ambulance response waiting times represent *lower* capacity. To
+control for this, indicators need inverting at several stages during the computation
+of the indices to ensure concistency in development methods, and alignment of the
+final outputs.
+
+### Stage 1: indicator files
+
+Each indicator of each domain for both resilience and capacity resides in its
+own unique file. To make these modular files usable across projects and to ease
+in updating and understanding them, the output of each file should be aligned to
+the *expected* direction given by the indicator name. Using the same example from
+above for capacity, higher scores in the output of the file `bed-availability.R` should indicate
+higher availability, and higher scores in the output of the file `ambulance-waiting-times.R`
+should indicate higher waiting times. Note, that these two indicators do not yet
+align to the goal that a **higher** score equals **higher** capacity. This should
+be tackled in the later `build-index.R` filer where indicators are combined.
+
+For any indicators that have been aggregated from a lower level geography to a 
+higher level geography using the `calculate_extent()` function, it is important
+that the argument `invert_percentiles` is set correctly. For any indicators in the
+vulnerability models, the argument should be set to `TRUE`, so that a higher
+score equates to a worst outcome. For any indicators in the capacity models, the
+argument should be set to `FALSE`, so that a lower score equates to a worse outcome.
+
+
+### Stage 2: join indicators
+
+Each index contains a `build-index.R` file in the root of the specific index folder.
+The first step of these build scripts is to align indicators. This achieved by
+mutiplying misaligned indicators by -1.
+
+For any vulnerability build script, the indicators should be aligned so that a
+**higher** score equals to **higher** vulnerability. For example the indicator
+`mean_vaccine_rate` should be multiplied by -1.
+
+For any capacity build script, the indicators should be aligned so that a **higher**
+score equals a **lower** capacity. Note, this does not align the capacity indicators
+to the format desired for the output. This gets taken care of in stage 3, detailed
+below. The reason the indicators needs to be aligned like this is to keep consistency
+in methods across the vulnerability and capacity models. For example, later in the
+`build-index.R` scripts, data is log-transformed to highlight areas of most need.
+In the case of capacity, this is areas of *lowest* capacity, and in the case of
+vulnerability, this is the areas of the *highest* vulnerability.
+
+## Stage 3: realign files ranks & deciles
+
+Capacity models require a final step of inverting ranks and deciles so that
+**higher scores** equal **higher capacity**. This can be achieved using the series
+of `inver*` functions in `R/utils.R`
+
 ## Models
 Sendai & Transactional model of stress. Indicator selection.
 

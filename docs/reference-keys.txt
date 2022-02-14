@@ -11,6 +11,12 @@ does-the-resilience-index-replace-the-covid-19-vulnerability-index
 can-the-indices-of-each-nation-be-compared-side-by-side
 status
 technical
+aligning-indicators
+final-outputs
+misalignment
+stage-1-indicator-files
+stage-2-join-indicators
+stage-3-realign-files-ranks-deciles
 models
 geography
 contributing
