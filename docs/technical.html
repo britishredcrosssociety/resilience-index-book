@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 2 Technical | Resilience Index Book</title>
 <meta name="author" content="The British Red Cross">
-<meta name="description" content="2.1 Aligning Indicators  2.1.1 Final outputs To match user expectation and to build a simple mental model, higher should mean higher. This means: - Higher vulnerability deciles/ranks = higher...">
+<meta name="description" content="2.1 Aligning Indicators  2.1.1 Final outputs To match user expectation and to build a simple mental model, higher should mean higher. This means: Higher vulnerability deciles/ranks = higher...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
 <meta property="og:title" content="Chapter 2 Technical | Resilience Index Book">
 <meta property="og:type" content="book">
-<meta property="og:description" content="2.1 Aligning Indicators  2.1.1 Final outputs To match user expectation and to build a simple mental model, higher should mean higher. This means: - Higher vulnerability deciles/ranks = higher...">
+<meta property="og:description" content="2.1 Aligning Indicators  2.1.1 Final outputs To match user expectation and to build a simple mental model, higher should mean higher. This means: Higher vulnerability deciles/ranks = higher...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 2 Technical | Resilience Index Book">
-<meta name="twitter:description" content="2.1 Aligning Indicators  2.1.1 Final outputs To match user expectation and to build a simple mental model, higher should mean higher. This means: - Higher vulnerability deciles/ranks = higher...">
+<meta name="twitter:description" content="2.1 Aligning Indicators  2.1.1 Final outputs To match user expectation and to build a simple mental model, higher should mean higher. This means: Higher vulnerability deciles/ranks = higher...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -63,9 +63,14 @@
 <span class="header-section-number">2.1.1</span> Final outputs<a class="anchor" aria-label="anchor" href="#final-outputs"><i class="fas fa-link"></i></a>
 </h3>
 <p>To match user expectation and to build a simple mental model, higher should mean
-higher. This means:<br>
-- <strong>Higher</strong> vulnerability deciles/ranks = <strong>higher</strong> vulnerability<br>
-- <strong>Higher</strong> capacity deciles/ranks = <strong>higher</strong> capacity</p>
+higher. This means:</p>
+<ul>
+<li>
+<strong>Higher</strong> vulnerability deciles/ranks = <strong>higher</strong> vulnerability<br>
+</li>
+<li>
+<strong>Higher</strong> capacity deciles/ranks = <strong>higher</strong> capacity</li>
+</ul>
 <p>Most users, however, will want to know areas with the <em>highest</em> vulnerability and
 the <em>lowest</em> capacity. Well designed plots and maps should guide to user to these
 areas without challenging the mental model of higher is higher. For example, a
@@ -97,13 +102,27 @@ above for capacity, higher scores in the output of the file <code>bed-availabili
 higher availability, and higher scores in the output of the file <code>ambulance-waiting-times.R</code>
 should indicate higher waiting times. Note, that these two indicators do not yet
 align to the goal that a <strong>higher</strong> score equals <strong>higher</strong> capacity. This should
-be tackled in the later <code>build-index.R</code> filer where indicators are combined.</p>
+be tackled in the later <code>build-index.R</code> file where indicators are combined.</p>
 <p>For any indicators that have been aggregated from a lower level geography to a
 higher level geography using the <code>calculate_extent()</code> function, it is important
-that the argument <code>invert_percentiles</code> is set correctly. For any indicators in the
-vulnerability models, the argument should be set to <code>TRUE</code>, so that a higher
-score equates to a worst outcome. For any indicators in the capacity models, the
-argument should be set to <code>FALSE</code>, so that a lower score equates to a worse outcome.</p>
+that the argument <code>invert_percentiles</code> is set correctly. <code>calculate_extent()</code> works
+by weighting one end of the distribution of the input indicator:</p>
+<div class="inline-figure"><img src="images/technical/alignment/calculate-extent.png" style="width:100.0%"></div>
+<p>To ensure areas of highest vulnerability and lowest capacity are correctly weighted,
+the following heuristics should be followed for the input indicator:</p>
+<ul>
+<li>If a higher score equates to higher vulnerability, set <code>invert_percentiles</code> to <code>TRUE</code>
+</li>
+<li>If a higher score equares to lower vulnerability, set <code>invert_percentiles</code> to <code>FALSE</code>
+</li>
+<li>If a higher score equates to higher capacity, set <code>invert_percentiles</code> to <code>FALSE</code>
+</li>
+<li>If a higher score eqates to lower capacity, set <code>invert_percentiles</code> to <code>TRUE</code>
+</li>
+</ul>
+<p>Note, that the setting of <code>invert_percentiles</code> is <em>indicator</em> specific, and not
+<em>vulnerability/capacity</em> specific. This means a general rule for vulnerability or
+capacity (e.g., always set <code>invert_percentiles</code> to <code>TRUE</code>) can not be set.</p>
 </div>
 <div id="stage-2-join-indicators" class="section level3" number="2.1.4">
 <h3>
@@ -480,7 +499,7 @@ of <code>inver*</code> functions in <code>R/utils.R</code></p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Resilience Index Book</strong>" was written by The British Red Cross. It was last built on 2022-02-14.</p>
+    <p>"<strong>Resilience Index Book</strong>" was written by The British Red Cross. It was last built on 2022-02-15.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

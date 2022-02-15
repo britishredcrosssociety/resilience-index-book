@@ -6,6 +6,7 @@
 
 To match user expectation and to build a simple mental model, higher should mean
 higher. This means:  
+
 - **Higher** vulnerability deciles/ranks = **higher** vulnerability  
 - **Higher** capacity deciles/ranks = **higher** capacity
 
@@ -36,15 +37,26 @@ above for capacity, higher scores in the output of the file `bed-availability.R`
 higher availability, and higher scores in the output of the file `ambulance-waiting-times.R`
 should indicate higher waiting times. Note, that these two indicators do not yet
 align to the goal that a **higher** score equals **higher** capacity. This should
-be tackled in the later `build-index.R` filer where indicators are combined.
+be tackled in the later `build-index.R` file where indicators are combined.
 
 For any indicators that have been aggregated from a lower level geography to a 
 higher level geography using the `calculate_extent()` function, it is important
-that the argument `invert_percentiles` is set correctly. For any indicators in the
-vulnerability models, the argument should be set to `TRUE`, so that a higher
-score equates to a worst outcome. For any indicators in the capacity models, the
-argument should be set to `FALSE`, so that a lower score equates to a worse outcome.
+that the argument `invert_percentiles` is set correctly. `calculate_extent()` works
+by weighting one end of the distribution of the input indicator:
 
+![](images/technical/alignment/calculate-extent.png){width=100%}
+
+To ensure areas of highest vulnerability and lowest capacity are correctly weighted,
+the following heuristics should be followed for the input indicator:  
+
+- If a higher score equates to higher vulnerability, set `invert_percentiles` to `TRUE`
+- If a higher score equares to lower vulnerability, set `invert_percentiles` to `FALSE`
+- If a higher score equates to higher capacity, set `invert_percentiles` to `FALSE`
+- If a higher score eqates to lower capacity, set `invert_percentiles` to `TRUE`
+
+Note, that the setting of `invert_percentiles` is *indicator* specific, and not
+*vulnerability/capacity* specific. This means a general rule for vulnerability or
+capacity (e.g., always set `invert_percentiles` to `TRUE`) can not be set.
 
 ### Stage 2: join indicators
 
