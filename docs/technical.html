@@ -104,25 +104,10 @@ should indicate higher waiting times. Note, that these two indicators do not yet
 align to the goal that a <strong>higher</strong> score equals <strong>higher</strong> capacity. This should
 be tackled in the later <code>build-index.R</code> file where indicators are combined.</p>
 <p>For any indicators that have been aggregated from a lower level geography to a
-higher level geography using the <code>calculate_extent()</code> function, it is important
-that the argument <code>invert_percentiles</code> is set correctly. <code>calculate_extent()</code> works
-by weighting one end of the distribution of the input indicator:</p>
-<div class="inline-figure"><img src="images/technical/alignment/calculate-extent.png" style="width:100.0%"></div>
-<p>To ensure areas of highest vulnerability and lowest capacity are correctly weighted,
-the following heuristics should be followed for the input indicator:</p>
-<ul>
-<li>If a higher score equates to higher vulnerability, set <code>invert_percentiles</code> to <code>TRUE</code>
-</li>
-<li>If a higher score equares to lower vulnerability, set <code>invert_percentiles</code> to <code>FALSE</code>
-</li>
-<li>If a higher score equates to higher capacity, set <code>invert_percentiles</code> to <code>FALSE</code>
-</li>
-<li>If a higher score eqates to lower capacity, set <code>invert_percentiles</code> to <code>TRUE</code>
-</li>
-</ul>
-<p>Note, that the setting of <code>invert_percentiles</code> is <em>indicator</em> specific, and not
-<em>vulnerability/capacity</em> specific. This means a general rule for vulnerability or
-capacity (e.g., always set <code>invert_percentiles</code> to <code>TRUE</code>) can not be set.</p>
+higher level geography using the <code>calculate_extent()</code>, the function ensures that
+the direction of the input data matches that of the output data. The process of
+inverting percentiles and realigning the output has been abstracted into the logic
+of the function.</p>
 </div>
 <div id="stage-2-join-indicators" class="section level3" number="2.1.4">
 <h3>
@@ -240,6 +225,13 @@ of <code>inver*</code> functions in <code>R/utils.R</code></p>
 <div class="inline-figure"><img src="images/technical/aggregation_techniques/trust_not_reporting.png" style="width:90.0%"></div>
 <p>The calculations of the new population proportions for this example were as follows:</p>
 <div class="inline-table"><table class="table table-sm">
+<colgroup>
+<col width="20%">
+<col width="20%">
+<col width="20%">
+<col width="20%">
+<col width="20%">
+</colgroup>
 <thead><tr class="header">
 <th>LAD</th>
 <th>Trust</th>
@@ -369,6 +361,12 @@ of <code>inver*</code> functions in <code>R/utils.R</code></p>
 <span class="header-section-number">2.7.1.9</span> Summary of methods<a class="anchor" aria-label="anchor" href="#summary-of-methods"><i class="fas fa-link"></i></a>
 </h4>
 <div class="inline-table"><table class="table table-sm">
+<colgroup>
+<col width="25%">
+<col width="25%">
+<col width="25%">
+<col width="25%">
+</colgroup>
 <thead><tr class="header">
 <th>Indicator</th>
 <th>Geography level of data</th>

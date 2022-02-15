@@ -40,23 +40,10 @@ align to the goal that a **higher** score equals **higher** capacity. This shoul
 be tackled in the later `build-index.R` file where indicators are combined.
 
 For any indicators that have been aggregated from a lower level geography to a 
-higher level geography using the `calculate_extent()` function, it is important
-that the argument `invert_percentiles` is set correctly. `calculate_extent()` works
-by weighting one end of the distribution of the input indicator:
-
-![](images/technical/alignment/calculate-extent.png){width=100%}
-
-To ensure areas of highest vulnerability and lowest capacity are correctly weighted,
-the following heuristics should be followed for the input indicator:  
-
-- If a higher score equates to higher vulnerability, set `invert_percentiles` to `TRUE`
-- If a higher score equares to lower vulnerability, set `invert_percentiles` to `FALSE`
-- If a higher score equates to higher capacity, set `invert_percentiles` to `FALSE`
-- If a higher score eqates to lower capacity, set `invert_percentiles` to `TRUE`
-
-Note, that the setting of `invert_percentiles` is *indicator* specific, and not
-*vulnerability/capacity* specific. This means a general rule for vulnerability or
-capacity (e.g., always set `invert_percentiles` to `TRUE`) can not be set.
+higher level geography using the `calculate_extent()`, the function ensures that
+the direction of the input data matches that of the output data. The process of
+inverting percentiles and realigning the output has been abstracted into the logic
+of the function.
 
 ### Stage 2: join indicators
 
