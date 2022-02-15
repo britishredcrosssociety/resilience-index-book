@@ -77,7 +77,7 @@ in methods across the vulnerability and capacity models. For example, later in t
 In the case of capacity, this is areas of *lowest* capacity, and in the case of
 vulnerability, this is the areas of the *highest* vulnerability.
 
-## Stage 3: realign files ranks & deciles
+### Stage 3: realign files ranks & deciles
 
 Capacity models require a final step of inverting ranks and deciles so that
 **higher scores** equal **higher capacity**. This can be achieved using the series
