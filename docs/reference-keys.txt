@@ -26,13 +26,16 @@ aggregration-techniques
 health-capacity---england
 public-health-england-catchment-calculations
 dealing-with-changes-in-trust-codes
+dealing-with-changes-in-lad-codes
 relative-value-indicators
 dealing-not-all-trusts-providing-data
 dealing-with-data-at-county-level
 raw-count-indicators
 dealing-with-changes-in-trust-codes-in-indicator-data
 dealing-with-missing-ae-data
-dealing-not-all-trusts-providing-service
+dealing-with-not-all-trusts-providing-the-service
 cqc-surveys
 summary-of-methods
+vcs-presence
 future
+url-your-book-url-like-httpsbookdown.orgyihuibookdown

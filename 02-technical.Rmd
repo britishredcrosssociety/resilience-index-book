@@ -102,13 +102,13 @@ There are additional complexities for the indicator data used within the capacit
 
 ##### Public Health England catchment calculations
 
-Public Health England (PHE) have collected data on the number of patients (elective and emergency) who are admitted from a Middle Super Output Area (MSOA) to a given NHS Trust, and also the number of people from a MSOA to any provider. This gives the proportion of the MSOA patients at each Trust.[1](https://app.box.com/s/qh8gzpzeo1firv1ezfxx2e6c4tgtrudl) 
+Public Health England (PHE) have collected data on the number of patients (elective and emergency) who are admitted from a Middle Super Output Area (MSOA) to a given NHS Trust, and also the number of people from a MSOA to any provider. This gives the proportion of the MSOA patients at each Trust.[1](https://app.box.com/s/qh8gzpzeo1firv1ezfxx2e6c4tgtrudl)
 
 ![](images/technical/aggregation_techniques/msoa_split_by_trusts.png){width=90%}
 
-These proportions were multiplied by the MSOA population (from ONS population numbers) to give the MSOA catchment population for a provider, and then these MSOA catchments were summed across each Trust to give a Trust catchment population.[1](https://app.box.com/s/qh8gzpzeo1firv1ezfxx2e6c4tgtrudl) In the above example if the MSOA population is 1,000 then the estimated catchment for Trust A for MSOA 1 is 400 people. 
+These proportions were multiplied by the MSOA population (from ONS population numbers) to give the MSOA catchment population for a provider, and then these MSOA catchments were summed across each Trust to give a Trust catchment population. In the above example if the MSOA population is 1,000 then the estimated catchment for Trust A for MSOA 1 is 400 people. 
 
-Note that in the data the proportions don't always sum to 100% when summed across each MSOA. Contacting PHE to find out more about this. 
+Note that in the data the proportions don't always total to 100% when summed across each MSOA. Contacting PHE to find out more about this. 
 
 Since have both the Trust catchment population and the MSOA catchments for a Trust can estimate the split of Trust population by MSOAs. 
 
@@ -121,7 +121,7 @@ MSOAs are coterminous to LADs and so can be aggregated and so the above can also
 
 It is important to note this method is an estimate and is based on a sample of data. 
 
-Also important to note that the data only includes acute Trusts and so does not have information on non-acute trusts such as community and mental health providers. Some of the indicators had data from these kind of Trusts and it was not possible at this time to attribute this information across LADs and therefore was not possible to add this to the index with this current method.    
+Also important to note that the data only includes acute Trusts and so does not have information on non-acute trusts, such as community and mental health providers. Some of the indicators had data from these kind of Trusts and it was not possible at this time to attribute this information across LADs and therefore was not possible to add this to the index with this current method.    
 
 #### Dealing with changes in Trust codes <a name="dealing-with-changes-in-trust-codes"></a>
 Trust codes can change because Trusts can combine and disaggregate over time. 
@@ -129,6 +129,10 @@ Trust codes can change because Trusts can combine and disaggregate over time.
 The geographr package [2](https://github.com/britishredcrosssociety/geographr) has a script which deals with updating trust codes [here](https://github.com/britishredcrosssociety/geographr/blob/main/data-raw/lookup_trust_msoa.R). This logic was used in the *'trust_changes.R'* file to create *'trust_changes.rds'* dataset which could be used to check changes in Trust codes. 
 
 Checks were done to see if any Trust codes were found in the PHE England catchment calculations but not in the trusts defined as open in the geographr package [3](https://github.com/britishredcrosssociety/geographr/blob/main/data-raw/points_nhs_trusts.R) and vice versa [here](https://github.com/britishredcrosssociety/resilience-index/blob/28763b0fa47e4c02bc945950f39e8696f831fd52/R/capacity/health-inequalities/england/trust_types/trust_msoa_lad_catchments.R#L48). Any changes were updated in the PHE England catchment calculations and saved as *lookup\_trust_lad.rds*. 
+
+#### Dealing with changes in LAD codes
+
+England Local Authority District codes and names can change over time. Because different indicator data was at differing time points they were all aligned to the 2021 LAD code using the  *'lad_lookup_over_times'* function from geographr. 
 
 
 #### Relative value indicators
@@ -142,11 +146,11 @@ Indicators which were dealt with using the following method:
 
 The LAD population proportioned to Trusts was used to do a  weighted average of these indicators. 
 
-For example if for LAD 1, 40% of the population is attributed to Trust A (which has a rating of 2) and 60% is attributed to Trust B (which has a rating of 4) then the weighted rating for LAD 1 is 0.4 * 2 + 0.6 * 4 = 3.2.
+For example if for a LAD, 40% of the population is attributed to Trust A (which has a rating of 2) and 60% is attributed to Trust B (which has a rating of 4) then the weighted rating for the LAD is 0.4 * 2 + 0.6 * 4 = 3.2.
 
 ##### Dealing not all Trusts providing data <a name="dealing-with-not-all-trusts-providing-data"></a>
 
-For the SHMI data only acute non-specialists trusts report this data and so the weights were re-calculated to give the proportion based on acute non-specialist patients. In the example below Trust D is a specialist trust and therefore does not report on SHMI 
+For the SHMI indicator data [here]9https://github.com/britishredcrosssociety/resilience-index/blob/main/R/capacity/health-inequalities/england/quality/deaths-associated-with-hospitalisation.R) only acute non-specialists trusts report this data and so the weights were re-calculated to give the proportion based on acute non-specialist patients. In the example below Trust D is a specialist trust and therefore does not report on SHMI 
 
 
 ![](images/technical/aggregation_techniques/trust_not_reporting.png){width=90%}
@@ -215,9 +219,9 @@ The following imputation method was used to estimate the % of those waiting long
 * Applied this median change to the April 2019 proportions for these 14 trusts. 
 * Applied this estimated proportion to the total number of people in A&E to estimate the number of people waiting over 4 hours. 
 
-#### Dealing not all Trusts providing service 
+#### Dealing with not all Trusts providing the service 
 
-5 open trusts did not have A&E waiting times data due to them being specialist and so potentially not having an A&E service. For this a similar approach of re-calculating proportions as [here](#dealing-with-not-all-trusts-providing-data) was taken.
+5 open trusts did not have A&E waiting times data due to them being specialist and so potentially not having an A&E service. For this a similar approach to [here](#dealing-with-not-all-trusts-providing-data) was taken of re-calculating proportions.
 
 #### CQC surveys
 For the CQC survey indicator there were different surveys for different services. Some were dated 2020 and therefore included:
@@ -235,10 +239,10 @@ As of Nov 2021 there were other service surveys that further in past (and so not
 * Ambulance (2013/14)
 * Outpatient (2011)
 
-For the surveys taken these were averaged, weighted by the number of people who responded of each of the services (noting these weightings may not be reflective of the respective sizes of the services provided by each Trust). Some of the Trusts had no survey responses, as they may not have provided the services asked about in the surveys. For this a similar approach of re-calculating proportions as [here](#dealing-with-not-all-trusts-providing-data) was taken.
+For the surveys taken these were averaged, weighted by the number of people who responded of each of the services, noting these weightings may not be reflective of the respective sizes of the services provided by each Trust. Some of the Trusts had no survey responses, as they may not have provided the services asked about in the surveys. For this a similar approach of re-calculating proportions to [here](#dealing-with-not-all-trusts-providing-data) was taken.
 
 
-### Summary of methods
+#### Summary of methods
 
 | Indicator | Geography level of data  |  Mapping steps |  Normalised at LAD level |
 |---|---|---|---|
@@ -253,3 +257,7 @@ For the surveys taken these were averaged, weighted by the number of people who 
 | CQC Quality rating  |  Trust | Trust to MSOA then LAD | N/A |
 | CQC Surveys  |  Trust | Trust to MSOA then LAD | N/A |
 |  SHMI (mortality) |  Trust | Trust to MSOA then LAD | N/A |
+
+#### VCS presence
+
+A measure of the presence of health and social charities in each LAD was also calculated. The logic used to define health/social charities within the data can be found [here](https://github.com/britishredcrosssociety/resilience-index/blob/b2aa9d33e21c97c589e491f20280268fae4720f2/R/capacity/health-inequalities/england/access-availability/vcs-presence.R#L110). The initial idea was to take the average income of the charity and split it between the areas it servers as indicated in the Charity Commissioner data [here](https://register-of-charities.charitycommission.gov.uk/register/full-register-download), however there were cases where the organisation worked in local authorities in England but also countries overseas and so couldn't split the income accurately. The count of organisations within an area was instead used. All organisations that served UK or England wide were ignored as the data is only being used for relative comparison between LADs and so these would be attributed to all LADs evenly. In cases where the data was at UTLA (county) or 'All of London' then it was counted against each of the LADs within the county or London respectively. 
