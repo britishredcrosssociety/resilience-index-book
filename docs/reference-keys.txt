@@ -36,4 +36,3 @@ dealing-not-all-trusts-providing-service
 cqc-surveys
 summary-of-methods
 future
-url-your-book-url-like-httpsbookdown.orgyihuibookdown
