@@ -43,7 +43,9 @@ For any indicators that have been aggregated from a lower level geography to a
 higher level geography using the `calculate_extent()`, the function ensures that
 the direction of the input data matches that of the output data. The process of
 inverting percentiles and realigning the output has been abstracted into the logic
-of the function.
+of the function:
+
+![](images/technical/alignment/calculate_extent.png){width=100%}
 
 ### Stage 2: join indicators
 
