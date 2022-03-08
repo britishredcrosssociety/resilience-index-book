@@ -30,7 +30,7 @@ The D&E Resilience Index currently includes data for three kinds of hazard:
 - Heatwaves (risks)
 - Dwelling fires (historical incidents)
 
-# Limitations, considerations, and future developments
+## Limitations, considerations, and future developments
 The determinants of vulnerability are complex and intertwined; they change over a person's life. Vulnerabilities may emerge, change, compound and persist over long periods, passing from generation to generation - and widening inequalities. Our model of vulnerability is cross-sectional rather than longitudinal, so cannot account for such changes. However, we will update the underlying indicators of vulnerability on an annual basis so that the Index has the most updated cross-sectional view of vulnerability and capacity.
 
 Intersectional vulnerabilities should be discussed at all times (i.e., taking into account people's overlapping identities and experiences in order to understand the complexity of discrimination and privileges they face).

@@ -8,8 +8,8 @@ The Resilience Index **maps** Local Authorities based on potential **need for su
 ### What is covered
 There are **two** indices, based on the British Red Cross's **strategic causes**:
 
-1. Disasters & Emergencies
-2. Health Inequalities
+- Disasters & Emergencies
+- Health Inequalities
 
 We are not developing a Resilience Index for Displacement & Migration, due to the sensitive nature of asylum and resettlement data. Instead, we are producing bespoke analyses to inform this strategic cause.
 
