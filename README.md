@@ -11,6 +11,6 @@ British Red Cross [Resilience Index](https://github.com/britishredcrosssociety/r
 
 ## Deploying the book
 To add changes:
-- Run  `bookdown::render_book()`
+- Run `bookdown::render_book()`
 - Check the book has built without errors by running a local version using `bookdown::serve_book()`
 - Push changes to the main branch on GitHub to automatically update the live book (via GitHub pages)
