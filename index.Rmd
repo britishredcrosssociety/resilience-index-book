@@ -18,7 +18,8 @@ csl: chicago-fullnote-bibliography.csl
 <img src="images/cover/cover.png" class="cover" width="250" height="250"/> This
 book contains the long-form documentation of the British Red Cross [Resilience
 Index](https://github.com/britishredcrosssociety/resilience-index). It is a
-work in progress, and is intended for a late 2022 release.
+work in progress, and its constituent parts will be released in an iterative 
+manner.
 
 The book starts at Chapter \@ref(overview) with a top-level overview of the
 Resilience Index. If you only have time to read one chapter, make it this. This
