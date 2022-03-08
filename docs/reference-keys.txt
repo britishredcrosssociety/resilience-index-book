@@ -10,6 +10,11 @@ faq
 does-the-resilience-index-replace-the-covid-19-vulnerability-index
 can-the-indices-of-each-nation-be-compared-side-by-side
 status
+health-inequalities
+vulnerability-to-health-crises
+health-and-care-system-capacity
+building-the-health-inequalities-index
+limitations-considerations-and-future-developments
 technical
 aligning-indicators
 final-outputs
