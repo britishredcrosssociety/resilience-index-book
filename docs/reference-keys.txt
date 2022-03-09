@@ -47,4 +47,3 @@ dealing-with-not-all-trusts-providing-the-service
 cqc-surveys
 summary-of-methods
 vcs-presence
-url-your-book-url-like-httpsbookdown.orgyihuibookdown
