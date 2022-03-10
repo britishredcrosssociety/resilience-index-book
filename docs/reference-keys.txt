@@ -22,8 +22,10 @@ building-the-health-inequalities-index
 limitations-considerations-and-future-developments-1
 developing-an-index
 end-goal
-adding-indicators
-weight-combine-indicators
+add-indicators
+combine-indicators
+combine-domains
+combine-vulnerability-and-capacity
 technical
 aligning-indicators
 final-outputs

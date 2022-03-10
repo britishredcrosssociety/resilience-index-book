@@ -69,20 +69,20 @@ Inequalities Index for Scotland.</p>
 <p>The end goal is to compute a resilience score, which is a combination of
 vulnerability and capacity:</p>
 <div class="inline-figure"><img src="images/developing-an-index/tree-diagram.png" style="width:100.0%"></div>
-<p>To get there we need to:</p>
+<p>The process to achieve the end goal is as follows:</p>
 <ol style="list-style-type: decimal">
 <li>Add indicators</li>
-<li>Weight the indicators and combine them to form domains</li>
-<li>Combine domains to make vulnerability and capacity scores</li>
-<li>Joing vulnerability and capacity scores to make an overall resilience score</li>
+<li>Combine indicators to form domains</li>
+<li>Combine domains and compute vulnerability and capacity scores</li>
+<li>Combine vulnerability and capacity scores to make an overall resilience score</li>
 </ol>
 </div>
-<div id="adding-indicators" class="section level2" number="4.2">
+<div id="add-indicators" class="section level2" number="4.2">
 <h2>
-<span class="header-section-number">4.2</span> Adding Indicators<a class="anchor" aria-label="anchor" href="#adding-indicators"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.2</span> Add indicators<a class="anchor" aria-label="anchor" href="#add-indicators"><i class="fas fa-link"></i></a>
 </h2>
 <p>In the Resilience Index <a href="https://github.com/britishredcrosssociety/resilience-index">GitHub</a>
-repo, navigate to the correct domain/strategic cause/nation subfolder.
+repo, navigate to the correct <code>domain/strategic-cause/nation</code> subfolder.
 To add vulnerability indicators to the Scottish Heath Inequalities index,
 navigate to <code>R/vulnerability/health-inequalities/scotland</code>:</p>
 <div class="inline-figure"><img src="images/developing-an-index/scotland-health-vulnerability.png" style="width:100.0%"></div>
@@ -97,10 +97,99 @@ in the root of the repo, in a structure which mirrors that of the file path in
 the <code>R/</code> folder:</p>
 <div class="inline-figure"><img src="images/developing-an-index/alcohol-misuse-saved.png" style="width:100.0%"></div>
 </div>
-<div id="weight-combine-indicators" class="section level2" number="4.3">
+<div id="combine-indicators" class="section level2" number="4.3">
 <h2>
-<span class="header-section-number">4.3</span> Weight &amp; Combine Indicators<a class="anchor" aria-label="anchor" href="#weight-combine-indicators"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.3</span> Combine indicators<a class="anchor" aria-label="anchor" href="#combine-indicators"><i class="fas fa-link"></i></a>
 </h2>
+<p>Once indicators have been added, they are joined in a <code>build-index.R</code> script,
+located in the root of the <code>domain/strategic-cause/nation</code> subfolder:</p>
+<div class="inline-figure"><img src="images/developing-an-index/build-index.png" style="width:100.0%"></div>
+<p>The process to combine domains varies by the strategic-cause and model of
+interest. The <a href="https://www.oecd.org/sdd/42495745.pdf">OECD handbook</a> on
+constructing composite indicators should be used as a reference text throughout.
+To combine vulnerability indicators for Scottish Health Inequalities, the
+following steps needs to be taken:</p>
+<ol style="list-style-type: decimal">
+<li>Load indicators into the R session:</li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Load indicators</span>
+<span class="va">healthy_lives_indicators</span> <span class="op">&lt;-</span>
+  <span class="fu">load_indicators</span><span class="op">(</span>
+    path <span class="op">=</span> <span class="st">"data/vulnerability/health-inequalities/scotland/healthy-lives"</span>,
+    key <span class="op">=</span> <span class="st">"lad_code"</span>
+  <span class="op">)</span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>Scale and align the indicators so that higher values equate to higher
+vulnerability scores: multiply misaligned indicators by -1:</li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">healthy_lives_scaled</span> <span class="op">&lt;-</span>
+  <span class="va">healthy_lives_indicators</span> <span class="op">%&gt;%</span>
+  <span class="fu">mutate</span><span class="op">(</span>
+    gcse_qualifications_percent <span class="op">=</span> <span class="va">gcse_qualifications_percent</span> <span class="op">*</span> <span class="op">-</span><span class="fl">1</span>,
+    healthy_eating_percent <span class="op">=</span> <span class="va">healthy_eating_percent</span> <span class="op">*</span> <span class="op">-</span><span class="fl">1</span>,
+    job_related_training_percent <span class="op">=</span> <span class="va">job_related_training_percent</span> <span class="op">*</span> <span class="op">-</span><span class="fl">1</span>,
+    activity_levels_met_percent <span class="op">=</span> <span class="va">activity_levels_met_percent</span> <span class="op">*</span> <span class="op">-</span><span class="fl">1</span>,
+    vaccine_rate_mean <span class="op">=</span> <span class="va">vaccine_rate_mean</span> <span class="op">*</span> <span class="op">-</span><span class="fl">1</span>,
+    young_people_training_percent <span class="op">=</span> <span class="va">young_people_training_percent</span> <span class="op">*</span> <span class="op">-</span><span class="fl">1</span>,
+    cancer_screening_percent <span class="op">=</span> <span class="va">cancer_screening_percent</span> <span class="op">*</span> <span class="op">-</span><span class="fl">1</span>
+  <span class="op">)</span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li><p>Apply functional transformations (e.g., log) to address non-normal
+distributions if necessary</p></li>
+<li><p>Normalise indicators to a mean of 0 and SD +-1:</p></li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">healthy_lives_weighted</span> <span class="op">&lt;-</span>
+  <span class="va">healthy_lives_scaled</span> <span class="op">%&gt;%</span>
+  <span class="fu">normalise_indicators</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<ol start="4" style="list-style-type: decimal">
+<li><p>Weight indicators using PCA or MLFA if appropriate</p></li>
+<li><p>Calculate domain scores by ranking and quantising the (weighted) normalised
+scores:</p></li>
+</ol>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">healthy_lives_weighted</span> <span class="op">%&gt;%</span>
+  <span class="fu">calculate_domain_scores</span><span class="op">(</span>
+    domain_name <span class="op">=</span> <span class="st">"healthy_lives"</span>,
+    num_quantiles <span class="op">=</span> <span class="fl">10</span>
+  <span class="op">)</span></code></pre></div>
+</div>
+<div id="combine-domains" class="section level2" number="4.4">
+<h2>
+<span class="header-section-number">4.4</span> Combine domains<a class="anchor" aria-label="anchor" href="#combine-domains"><i class="fas fa-link"></i></a>
+</h2>
+<p>Combine domains with equal weighting and rank and quantise the output to produce
+a composite score:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">health_inequalities_scores</span> <span class="op">&lt;-</span>
+  <span class="va">healthy_lives_scores</span> <span class="op">%&gt;%</span>
+  <span class="fu">left_join</span><span class="op">(</span>
+    <span class="va">healthy_people_scores</span>,
+    by <span class="op">=</span> <span class="st">"lad_code"</span>
+  <span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">left_join</span><span class="op">(</span>
+    <span class="va">healthy_places_scores</span>,
+    by <span class="op">=</span> <span class="st">"lad_code"</span>
+  <span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">select</span><span class="op">(</span>
+    <span class="va">lad_code</span>,
+    <span class="fu">ends_with</span><span class="op">(</span><span class="st">"domain_score"</span><span class="op">)</span>
+  <span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">calculate_composite_score</span><span class="op">(</span>
+    index_name <span class="op">=</span> <span class="st">"health_inequalities"</span>,
+    num_quantiles <span class="op">=</span> <span class="fl">10</span>
+  <span class="op">)</span></code></pre></div>
+</div>
+<div id="combine-vulnerability-and-capacity" class="section level2" number="4.5">
+<h2>
+<span class="header-section-number">4.5</span> Combine vulnerability and capacity<a class="anchor" aria-label="anchor" href="#combine-vulnerability-and-capacity"><i class="fas fa-link"></i></a>
+</h2>
+<p>Currently, vulnerability and capacity composite scores are not computed on to
+produce a resilience score. Rather, the two scores are plotted using a bivariate
+choropleth map, which examines the intersection of the two variables. For an
+example of how these plots are run, see <a href="https://github.com/britishredcrosssociety/resilience-index/blob/main/R/vulnerability/health-inequalities/scotland/plot-index.R">here</a>.</p>
 
 </div>
 </div>
@@ -112,8 +201,10 @@ the <code>R/</code> folder:</p>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#developing-an-index"><span class="header-section-number">4</span> Developing an Index</a></li>
 <li><a class="nav-link" href="#end-goal"><span class="header-section-number">4.1</span> End goal</a></li>
-<li><a class="nav-link" href="#adding-indicators"><span class="header-section-number">4.2</span> Adding Indicators</a></li>
-<li><a class="nav-link" href="#weight-combine-indicators"><span class="header-section-number">4.3</span> Weight &amp; Combine Indicators</a></li>
+<li><a class="nav-link" href="#add-indicators"><span class="header-section-number">4.2</span> Add indicators</a></li>
+<li><a class="nav-link" href="#combine-indicators"><span class="header-section-number">4.3</span> Combine indicators</a></li>
+<li><a class="nav-link" href="#combine-domains"><span class="header-section-number">4.4</span> Combine domains</a></li>
+<li><a class="nav-link" href="#combine-vulnerability-and-capacity"><span class="header-section-number">4.5</span> Combine vulnerability and capacity</a></li>
 </ul>
 
       <div class="book-extra">
