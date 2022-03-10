@@ -20,6 +20,10 @@ vulnerability-to-health-crises
 health-and-care-system-capacity
 building-the-health-inequalities-index
 limitations-considerations-and-future-developments-1
+developing-an-index
+end-goal
+adding-indicators
+weight-combine-indicators
 technical
 aligning-indicators
 final-outputs

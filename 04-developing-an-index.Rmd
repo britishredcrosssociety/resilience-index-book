@@ -1,0 +1,50 @@
+# Developing an Index
+
+This chapter runs through the process of developing a whole index for a single
+nation. Its purpose is to demonstrate the top-level workflow and ideas, before
+later chapters dive into the technical, nitty-girtty details of the build
+process.
+
+For demonstration purposes, let's run through the workflow to build a Health
+Inequalities Index for Scotland.
+
+## End goal
+
+The end goal is to compute a resilience score, which is a combination of
+vulnerability and capacity:
+
+![](images/developing-an-index/tree-diagram.png){width=100%}
+
+To get there we need to:
+
+1. Add indicators
+2. Weight the indicators and combine them to form domains
+3. Combine domains to make vulnerability and capacity scores
+4. Joing vulnerability and capacity scores to make an overall resilience score
+
+## Adding Indicators
+
+In the Resilience Index [GitHub](https://github.com/britishredcrosssociety/resilience-index)
+repo, navigate to the correct domain/strategic cause/nation subfolder.
+To add vulnerability indicators to the Scottish Heath Inequalities index,
+navigate to `R/vulnerability/health-inequalities/scotland`:
+
+![](images/developing-an-index/scotland-health-vulnerability.png){width=100%}
+
+If the model has subdomains, like in the case above, navigate into the
+subsequent folder:
+
+![](images/developing-an-index/scotland-health-vulnerability-healthy-lives.png){width=100%}
+
+To add an indicator, add a new `.R` file. Each file should contain a stand-alone
+modular script, that should compute the statistic for a single indicator:
+
+![](images/developing-an-index/alcohol-misuse.png){width=100%}
+
+The output of this script is then saved in a `.rds` format in the `data/` folder
+in the root of the repo, in a structure which mirrors that of the file path in
+the `R/` folder:
+
+![](images/developing-an-index/alcohol-misuse-saved.png){width=100%}
+
+## Weight & Combine Indicators
