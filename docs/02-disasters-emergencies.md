@@ -35,6 +35,8 @@ The determinants of vulnerability are complex and intertwined; they change over 
 
 Intersectional vulnerabilities should be discussed at all times (i.e., taking into account people's overlapping identities and experiences in order to understand the complexity of discrimination and privileges they face).
 
+For which hazards does having previous experience / historical exposure **not** affect vulnerability?
+
 The current version of the D&E Resilience Index uses a single model of vulnerability and a single model of capacity, regardless of hazard. For future versions, we are exploring how best to model vulnerability to different types of hazard, potentially ending up with one vulnerability model for flooding, another vulnerability model for heatwaves, etc. We will do so only for hazards with strong spatial predictability. This means future versions may not include a map for dwelling fires; instead, we would produce an analysis of vulnerable cohorts at risk of experiencing dwelling fires. (How we model community/system capacity is likely to remain constant across different types of hazard.)
 
 The future version(s) will map vulnerability within Middle Layer Super Output Areas (MSOAs) in England/Wales, Intermediate Zones in Scotland, and Super Output Areas in Scotland. These are small areas containing roughly 5,000 - 15,000 people. Capacity is likely to remain at Local Authority-level, although we will explore methods for modelling capacity within MSOAs.
