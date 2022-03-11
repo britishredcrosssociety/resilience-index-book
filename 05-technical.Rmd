@@ -139,7 +139,7 @@ For example if for a LAD, 40% of the population is attributed to Trust A (which 
 
 ##### Dealing not all Trusts providing data <a name="dealing-with-not-all-trusts-providing-data"></a>
 
-For the SHMI indicator data [here]9https://github.com/britishredcrosssociety/resilience-index/blob/main/R/capacity/health-inequalities/england/quality/deaths-associated-with-hospitalisation.R) only acute non-specialists trusts report this data and so the weights were re-calculated to give the proportion based on acute non-specialist patients. In the example below Trust D is a specialist trust and therefore does not report on SHMI 
+For the SHMI indicator data [here](https://github.com/britishredcrosssociety/resilience-index/blob/main/R/capacity/health-inequalities/england/quality/deaths-associated-with-hospitalisation.R) only acute non-specialists trusts report this data and so the weights were re-calculated to give the proportion based on acute non-specialist patients. In the example below Trust D is a specialist trust and therefore does not report on SHMI 
 
 
 ![](images/technical/aggregation_techniques/trust_not_reporting.png){width=90%}

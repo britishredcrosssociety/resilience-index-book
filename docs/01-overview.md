@@ -53,14 +53,14 @@ No. They are designed to be viewed independently.
 
 | Nation | Strategic Cause | Vulnerability | Capacity | Shocks |
 | --- | --- | --- | --- | --- |
-| England | Health Inequalities | :heavy_check_mark: | :heavy_check_mark: | :no_entry_sign: |
-| England | Disasters & Emergencies | :construction: - Under development | :construction: - Under development | :heavy_check_mark: - Heat Hazards |
-| Scotland | Health Inequalities | :heavy_check_mark: | :x: | :no_entry_sign: |
-| Scotland | Disasters & Emergencies | :heavy_check_mark: | :x: | :heavy_check_mark: - Heat Hazards |
-| Wales | Health Inequalities | :construction: - Under development | :x: | :no_entry_sign: |
-| Wales | Disasters & Emergencies | :heavy_check_mark: | :x: | :x: |
-| Northern Ireland | Health Inequalities | :heavy_check_mark: | :heavy_check_mark: | :no_entry_sign: |
-| Northern Ireland | Disasters & Emergencies | :heavy_check_mark: | :construction: - Under development | :heavy_check_mark: - Fires & Floods |
+| England | Health Inequalities | ✅ | ✅ | 🚫 |
+| England | Disasters & Emergencies | 🚧 - Under development | 🚧 - Under development | ✅ - Heat Hazards |
+| Scotland | Health Inequalities | ✅ | ❌ | 🚫 |
+| Scotland | Disasters & Emergencies | ✅: | ❌ | ✅ - Heat Hazards |
+| Wales | Health Inequalities | 🚧 - Under development | ❌ | 🚫 |
+| Wales | Disasters & Emergencies | ✅ | ❌ | ❌ |
+| Northern Ireland | Health Inequalities | ✅ | ✅ | 🚫 |
+| Northern Ireland | Disasters & Emergencies | ✅ | 🚧 - Under development | ✅ - Fires & Floods |
 
 To add:
 
